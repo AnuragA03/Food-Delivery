@@ -6,6 +6,8 @@ import cors from "cors"
 //remember to name it with .js
 import { connectDB } from "./config/db.js"
 import foodRouter from "./routes/foodRoute.js"
+import userRouter from "./routes/userRoute.js"
+import 'dotenv/config'
 
 //app config
 const app = express()
@@ -23,6 +25,9 @@ app.use("/api/food", foodRouter);
 
 //this api endpoint is built to check images that are uploaded in the uploads folder with /images/image_filename.png
 app.use("/images",express.static('uploads'))
+
+// connect with user
+app.use("/api/user", userRouter)
 
 // routes
 app.get("/", (req, res) => {

@@ -4,10 +4,7 @@ import { assets } from '../../assets/assets'
 import axios from "axios"
 import { toast } from 'react-toastify'
 
-const Add = () => {
-  //creating url
-  const url = "http://localhost:4000";
-
+const Add = ({url}) => {
 
   const [image, setImage] = useState(false);
   const [data, setData] = useState({
@@ -48,10 +45,6 @@ const Add = () => {
       toast.error(response.data.message);
     }
   }
-
-  useEffect(() => {
-    console.log(data)
-  },[data])
 
   return (
     <div className='add'>
