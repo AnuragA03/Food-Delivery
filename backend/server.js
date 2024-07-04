@@ -8,6 +8,7 @@ import { connectDB } from "./config/db.js"
 import foodRouter from "./routes/foodRoute.js"
 import userRouter from "./routes/userRoute.js"
 import 'dotenv/config'
+import cartRouter from "./routes/cartRoute.js"
 
 //app config
 const app = express()
@@ -28,6 +29,9 @@ app.use("/images",express.static('uploads'))
 
 // connect with user
 app.use("/api/user", userRouter)
+
+// for cart data of user
+app.use("/api/cart", cartRouter)
 
 // routes
 app.get("/", (req, res) => {
