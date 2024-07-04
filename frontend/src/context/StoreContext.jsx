@@ -24,11 +24,23 @@ const StoreContextProvider = (props) => {
         else {
             setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }))
         }
+
+        // integrating it with backend and ADDING the data in database if the token of user is available
+        // ! VERY IMPORTANT
+        if (token) {
+            await axios.post(url+"/api/cart/add", { itemId }, { headers: {token} })
+        }
     }
 
     // for removing item from cart
     const removeFromCart = async (itemId) => {
         setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }))
+
+        // integrating it with backend and REMOVING the data in database if the token of user is available
+        // ! VERY IMPORTANT
+        if (token) {
+            await axios.post(url+"/api/cart/remove", { itemId }, { headers: {token} })
+        }
     }
 
     // useEffect(() => {
@@ -53,11 +65,18 @@ const StoreContextProvider = (props) => {
         setFoodList(response.data.data)
     }
 
+    // ! this functionality is used to store the cart information on the webpage even when the page is reloaded, if token is found it restores that cart information from database
+    const loadCartData = async (token) => {
+        const response = await axios.post(url+"/api/cart/get" , {} ,{ headers: {token}});
+        setCartItems(response.data.cartData);
+    }
+
     useEffect(() => {
         async function loadData(){
             await fetchFoodList()
             if(localStorage.getItem("token")){
-                setToken(localStorage.getItem("token"))
+                setToken(localStorage.getItem("token"));
+                await loadCartData(localStorage.getItem("token"));
             }
         }
 
