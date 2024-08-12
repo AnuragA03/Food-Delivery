@@ -2,7 +2,8 @@
     padding: 20px 0px;
     display: flex;
     justify-content: space-between;
-    align-items: center;   
+    align-items: center;
+    scroll-behavior: smooth;
 }
 
 .navbar .logo{
