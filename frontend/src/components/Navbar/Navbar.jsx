@@ -21,7 +21,7 @@ const Navbar = ({setShowLogin}) => {
 
   return (
     <div className='navbar'>
-        <Link to="/"><img src={assets.logo} alt="" className='logo'/></Link>
+        <Link to="/"><img src={assets.man} alt="" className='logo'/></Link>
         <ul className="navbar-menu">
             {/* added navbar scroll to the component feature */}
             <Link to="/" onClick={() => setMenu("home")} className={menu ==="home"?"active":""}>Home</Link>
